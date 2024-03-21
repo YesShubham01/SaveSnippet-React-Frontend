@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SnippetTable from './ResultPage Components/SnippetTable'
 import SnippetBox from '../components/SnippetBox'
 
-const snippet = [
-    {
-        username: 'Shubham Puhal',
-        language: 'JavaScript',
-        stdin: '12 24',
-        time: '10:00',
-    },
+export async function fetchAllSnippets() {
+    try {
+        const response = await fetch("http://localhost:8080/api/snippet/getAllSnippet");
+        if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error; // Re-throw for potential error handling in caller
+    }
+}
 
+export const snippets = await fetchAllSnippets();
 
-]
 
 function ResultPage() {
+
+    const [selectedSnippet, setSelectedSnippet] = useState("");
     return (
 
         <>
@@ -32,9 +40,10 @@ function ResultPage() {
                     </div>
                 </div>
                 <SnippetTable
-                    snippet={snippet}
+                    snippet={snippets}
+                    setSelectedSnippet={setSelectedSnippet}
                 />
-                <SnippetBox />
+                <SnippetBox selectedSnippet={selectedSnippet}/>
             </section>
         </>
     )

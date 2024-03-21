@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SnippetTable({snippet}) {
+function SnippetTable({ snippet, setSelectedSnippet }) {
     return (
         <div className="mt-6 mx-6 flex flex-col shadow-2xl rounded-lg">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 ">
@@ -40,7 +40,7 @@ function SnippetTable({snippet}) {
                             </thead>
                             <tbody className="divide-y divide-gray-200 bg-white">
                                 {snippet.map((snip) => (
-                                    <tr key={snip.username}>
+                                    <tr className="clickable-row" onClick={() => { setSelectedSnippet(snip); }}>
                                         <td className="whitespace-nowrap px-4 py-4">
                                             <div className="flex items-center">
 
@@ -54,7 +54,7 @@ function SnippetTable({snippet}) {
                                             <div className="text-sm text-gray-900">{snip.stdin}</div>
                                         </td>
                                         <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-900">
-                                            {snip.time}
+                                            {snip.timestamp}
                                         </td>
 
                                     </tr>

@@ -2,10 +2,13 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-function Button() {
+function Button({onClickCallback, isSuccess}) {
   const navigate = useNavigate();
-  const handleButtonClick = () => {
-    navigate('/result'); // Navigate to '/result' route
+  const handleButtonClick = async() => {
+    await onClickCallback();
+    if(isSuccess){
+      navigate('/result'); // Navigate to '/result' route
+    }
   };
 
   return (
