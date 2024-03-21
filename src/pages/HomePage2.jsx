@@ -26,7 +26,6 @@ function HomePage2() {
                 headers: { 'Content-Type': 'application/json' }, // Set content type
             });
             setIsDataSaved(true);
-            snippets = await fetchAllSnippets();
         }
         catch (error) {
             setIsDataSaved(false);

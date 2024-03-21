@@ -16,10 +16,10 @@ export async function fetchAllSnippets() {
     }
 }
 
-export const snippets = await fetchAllSnippets();
 
+async function ResultPage() {
 
-function ResultPage() {
+    const snippets = await fetchAllSnippets();
 
     const [selectedSnippet, setSelectedSnippet] = useState("");
     return (
