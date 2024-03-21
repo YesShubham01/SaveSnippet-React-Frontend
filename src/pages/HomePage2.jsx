@@ -4,7 +4,6 @@ import Button from './HomePage Components/Button';
 import InputTextComponent from './HomePage Components/InputTextComponent'
 import SelectComponent from './HomePage Components/SelectComponent';
 import InputTextArea from './HomePage Components/InputTextArea';
-import { fetchAllSnippets, snippets } from './ResultPage';
 
 
 function HomePage2() {

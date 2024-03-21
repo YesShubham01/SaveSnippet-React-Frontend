@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-const SnippetBox = (selectedSnippet) => {
-    const codeString = selectedSnippet.code;
-    console.log("code:",selectedSnippet.username );
+const SnippetBox = ({selectedSnippet}) => {
+    const codeString = selectedSnippet?.code ?? "Hello there! </>"; // Use empty string as a default
+
+    console.log("code:", selectedSnippet.code);
 
     const [isCopied, setCopied] = useState(); // bool
     const copyFunction = () => {
@@ -21,7 +22,7 @@ const SnippetBox = (selectedSnippet) => {
         <div className='logo'>
             <div className='mt-6 rounded-xl overflow-hidden bg-[#3a404d]'>
                 <div className='flex justify-between px-4 py-1 text-white text-xs items-center'>
-                    <p className='text-sm'>Snippet</p>
+                    <p className='text-sm'>{selectedSnippet.username + "'s "} Code Snippet</p>
                     {isCopied ? (<button
                         onClick={copyFunction}
                         className='bg-transparent py-1 inline-flex items-center gap-1' >

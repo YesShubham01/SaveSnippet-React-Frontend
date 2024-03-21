@@ -1,29 +1,41 @@
-import React, { useState } from 'react'
-import SnippetTable from './ResultPage Components/SnippetTable'
-import SnippetBox from '../components/SnippetBox'
+import React, { useState, useEffect } from 'react';
+import SnippetTable from './ResultPage Components/SnippetTable';
+import SnippetBox from '../components/SnippetBox';
+import { useNavigate } from 'react-router-dom';
 
-export async function fetchAllSnippets() {
-    try {
-        const response = await fetch("http://localhost:8080/api/snippet/getAllSnippet");
-        if (!response.ok) {
-            throw new Error(`API request failed with status ${response.status}`);
+
+
+
+function ResultPage() {
+    const [snippets, setSnippets] = useState([]);
+    // ... other state
+
+    useEffect(() => {
+        async function fetchAllSnippets() {
+            try {
+                const response = await fetch("http://localhost:8080/api/snippet/getAllSnippet");
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+                const data = await response.json();
+                const fetchedSnippets = data;
+                setSnippets(fetchedSnippets);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                throw error; // Re-throw for potential error handling in caller
+            }
         }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error; // Re-throw for potential error handling in caller
-    }
-}
+        fetchAllSnippets();
+    }, []);
 
+    const [selectedSnippet, setSelectedSnippet] = useState(null); // Initialize selectedSnippet
 
-async function ResultPage() {
+    const navigate = useNavigate();
+    const handleButtonClick = () => {
+            navigate('/#'); // Navigate to '/result' route
+    };
 
-    const snippets = await fetchAllSnippets();
-
-    const [selectedSnippet, setSelectedSnippet] = useState("");
     return (
-
         <>
             <h1 className='logoFont'>SaveSnippet</h1>
 
@@ -33,20 +45,31 @@ async function ResultPage() {
                     <div>
                         <button
                             type="button"
+                            onClick={handleButtonClick}
                             className="shadow-2xl rounded-md bg-black px-3 py-2 text-sm font-semibold text-white hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                         >
                             Add Snippet
                         </button>
                     </div>
                 </div>
-                <SnippetTable
-                    snippet={snippets}
-                    setSelectedSnippet={setSelectedSnippet}
-                />
-                <SnippetBox selectedSnippet={selectedSnippet}/>
+                {snippets.length ? (
+                    <SnippetTable
+                        snippet={snippets}
+                        setSelectedSnippet={setSelectedSnippet}
+                    />
+                ) : (
+                    <p>Loading snippets...</p>
+                )}
+
+
+                {
+                    selectedSnippet? <SnippetBox selectedSnippet={selectedSnippet} />:
+                    <SnippetBox selectedSnippet={{code: "Hello there! </>", username: "Someone"}} />
+                }
+
             </section>
         </>
-    )
+    );
 }
 
-export default ResultPage
+export default ResultPage;
