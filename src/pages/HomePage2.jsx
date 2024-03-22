@@ -19,7 +19,7 @@ function HomePage2() {
 
         const currentTime = new Date().toLocaleTimeString();
         try {
-            const response = await fetch('http://localhost:8080/api/snippet/createSnippet', {
+            const response = await fetch('https://savesnippet.onrender.com/api/snippet/createSnippet', {
                 method: 'POST', // Specify POST for sending data
                 body: JSON.stringify({ username: username, language: preferredLanguage, stdin: standardInput, timestamp: currentTime, code: sourceCode }), // Format data as JSON
                 headers: { 'Content-Type': 'application/json' }, // Set content type

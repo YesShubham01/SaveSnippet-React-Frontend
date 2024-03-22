@@ -13,7 +13,7 @@ function ResultPage() {
     useEffect(() => {
         async function fetchAllSnippets() {
             try {
-                const response = await fetch("http://localhost:8080/api/snippet/getAllSnippet");
+                const response = await fetch("https://savesnippet.onrender.com/api/snippet/getAllSnippet");
                 if (!response.ok) {
                     throw new Error(`API request failed with status ${response.status}`);
                 }
