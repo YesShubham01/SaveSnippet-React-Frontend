@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import HomePage2 from './HomePage2'
 import { Link } from 'react-router-dom';
+import AnimatedBg from '../components/AnimatedBg';
+
 
 
 function HomePage() {
@@ -28,6 +30,7 @@ function HomePage() {
 
     return (
         <div style={{ padding: '20px' }}>
+            <AnimatedBg/>
             <h1 className='logoFont'>SaveSnippet</h1>
             <HomePage2 />
         </div>

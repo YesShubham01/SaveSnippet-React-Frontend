@@ -21,9 +21,23 @@ function SnippetTable({ snippet, setSelectedSnippet }) {
 
     const [data, setData] = useState(codes.slice(0, 5));
 
+
     const onClickSetData = (index) => {
         setData(codes.slice(5 * index, 5 * (index + 1)));
+
     }
+
+    const onClickRow = (snip) => {
+        setSelectedSnippet(snip);
+        
+        setTimeout(() => {
+            const targetSection = document.getElementById('codeBox');
+            targetSection.scrollIntoView({
+              behavior: 'smooth', // Add smooth scrolling animation (optional)
+            });
+          }, 100);
+    }
+
 
 
     return (
@@ -66,7 +80,9 @@ function SnippetTable({ snippet, setSelectedSnippet }) {
                                         <tr
                                             key={snip.timestamp}
                                             className={`clickable-row hover:bg-gray-100 hover:border-[#646cff] hover:border-1`} // Add hover class
-                                            onClick={() => setSelectedSnippet(snip)}
+                                            onClick={() => {
+                                                onClickRow(snip);
+                                            }}
                                         >
                                             <td className="whitespace-nowrap px-4 py-4">
                                                 <div className="flex items-center">
@@ -100,14 +116,14 @@ function SnippetTable({ snippet, setSelectedSnippet }) {
                 <button
                     onClick={() => { onClickSetData(0); }}
                     href="#"
-                    className="bg-transparent mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
+                    className="shadow-lg bg-gray-100 hover:bg-gray-200 mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
                 >
                     1
                 </button>
                 <button
                     onClick={() => { onClickSetData(1); }}
                     href="#"
-                    className="bg-transparent mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
+                    className="bg-gray-100 hover:bg-gray-200 mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
                 >
                     2
                 </button>
@@ -116,7 +132,7 @@ function SnippetTable({ snippet, setSelectedSnippet }) {
 
 
                     href="#"
-                    className="bg-transparent mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
+                    className="bg-gray-100 hover:bg-gray-200 mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
                 >
                     3
                 </button>
@@ -125,7 +141,7 @@ function SnippetTable({ snippet, setSelectedSnippet }) {
 
 
                     href="#"
-                    className="bg-transparent mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
+                    className="bg-gray-100 hover:bg-gray-200 mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
                 >
                     4
                 </button>

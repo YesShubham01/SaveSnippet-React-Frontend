@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SnippetTable from './ResultPage Components/SnippetTable';
 import SnippetBox from '../components/SnippetBox';
 import { useNavigate } from 'react-router-dom';
+import AnimatedBg from '../components/AnimatedBg';
 
 
 
@@ -32,11 +33,15 @@ function ResultPage() {
 
     const navigate = useNavigate();
     const handleButtonClick = () => {
-            navigate('/#'); // Navigate to '/result' route
+        navigate('/#'); // Navigate to '/result' route
     };
+
+    
+
 
     return (
         <>
+            <AnimatedBg />
             <h1 className='logoFont'>SaveSnippet</h1>
 
             <section className="mx-auto w-full max-w-7xl px-4 py-4 text-left">
@@ -61,13 +66,16 @@ function ResultPage() {
                     <p className='text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>Loading snippets...</p>
                 )}
 
-
-                {
-                    selectedSnippet? <SnippetBox selectedSnippet={selectedSnippet} />:
-                    <SnippetBox selectedSnippet={{code: "Hello there! </>", username: "Someone"}} />
-                }
+                <div id='codeBox'>
+                    {
+                        selectedSnippet ? <SnippetBox selectedSnippet={selectedSnippet} /> :
+                            <SnippetBox selectedSnippet={{ code: "Hello there! </>", username: "Someone" }} />
+                    }
+                </div>
 
             </section>
+
+
         </>
     );
 }
