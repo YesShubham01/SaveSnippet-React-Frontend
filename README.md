@@ -2,6 +2,12 @@
 
 Live Link: https://save-snippet.web.app/
 
+Backend:
+Live Deployed Server Link (Render) : https://savesnippet.onrender.com/
+API links: https://savesnippet.onrender.com/api/snippet/getAllSnippet
+
+Backend Repo link : https://github.com/YesShubham01/SaveSnippet_Backend
+
 ScreenRecording:
 https://drive.google.com/file/d/1OV67VJR-i5QVHFO5KNtc5DfZA0Mkj_Rn/view?usp=drive_link
 
