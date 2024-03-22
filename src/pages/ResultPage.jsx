@@ -58,7 +58,7 @@ function ResultPage() {
                         setSelectedSnippet={setSelectedSnippet}
                     />
                 ) : (
-                    <p>Loading snippets...</p>
+                    <p className='text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>Loading snippets...</p>
                 )}
 
 

@@ -4,9 +4,13 @@ import Button from './HomePage Components/Button';
 import InputTextComponent from './HomePage Components/InputTextComponent'
 import SelectComponent from './HomePage Components/SelectComponent';
 import InputTextArea from './HomePage Components/InputTextArea';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function HomePage2() {
+    const navigate = useNavigate();
+
     const [username, setUsername] = useState('');
     const [preferredLanguage, setPreferredLanguage] = useState('');
     const [standardInput, setStandardInput] = useState('');
@@ -16,6 +20,7 @@ function HomePage2() {
 
 
     const handleSubmit = async () => {
+        setIsLoading(true);
 
         const currentTime = new Date().toLocaleTimeString();
         try {
@@ -25,11 +30,15 @@ function HomePage2() {
                 headers: { 'Content-Type': 'application/json' }, // Set content type
             });
             setIsDataSaved(true);
+
+            navigate('/result'); // Navigate to '/result' route
         }
         catch (error) {
             setIsDataSaved(false);
             console.error('Error fetching data:', error);
         }
+
+        setIsLoading(false);
 
     };
 
@@ -101,7 +110,7 @@ function HomePage2() {
                         <hr className="mt-6 border-gray-200" />
 
                         {isLoading ?
-                            <p>Loading data...</p> : <Button onClickCallback={handleSubmit} isSuccess={isDataSaved} />}
+                            <p className='text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>Loading data...</p> : <Button onClickCallback={handleSubmit} />}
 
                     </div>
                 </div>
